@@ -1,0 +1,67 @@
+{
+  "keywords": [],
+  "author": "Rex Aliis",
+  "license": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License",
+  "description": "A rich presence maker for Discord",
+  "name": "discordrpcmaker",
+  "version": "1.0.0",
+  "main": "build/src/main.js",
+  "icon": "visual/discord0.ico",
+  "scripts": {
+    "test": "electron .",
+    "clean": "rmdir build /s /q",
+    "build": "tsc -p ./tsconfig.json --pretty",
+    "validate": "tsc -p ./tsconfig.json --noEmit --pretty",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "tailwindcss": "tailwindcss -i ./src/styles/input.css -o ./src/styles/output.css --watch"
+  },
+  "dependencies": {
+    "@discordjs/collection": "^1.1.0",
+    "@types/discord-rpc": "^4.0.3",
+    "discord-rpc": "^4.0.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "node-windows": "^1.0.0-beta.8"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.66",
+    "@electron-forge/maker-deb": "^6.0.0-beta.66",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.66",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.66",
+    "@electron-forge/maker-zip": "^6.0.0-beta.66",
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "electron": "^20.1.3",
+    "eslint": "^8.23.1",
+    "tailwindcss": "^3.1.8",
+    "typescript": "^4.8.3"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "discordrpc"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}

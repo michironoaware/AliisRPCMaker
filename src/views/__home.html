@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<title>Home</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+	<link rel='stylesheet' href='../styles/global.css'>
+	<link rel='stylesheet' href='../styles/basic.css'>
+	<link rel='stylesheet' href='../styles/home.css'>
+	<link rel='stylesheet' href='../styles/presences.css'>
+	<script src='../scripts/utils.js'></script>
+</head>
+
+<template id='template-welcome'>
+
+</template>
+
+<template id='template-presences'>
+	<h1>Presences</h1> <!--Create presence button, probably i should use a horizontal flex (and add the h1 inside)-->
+	<span style='color: #ffffff80;'>Presences are the best way to show the world what you are doing!</span><br><br>
+	<div id='presence-list'>
+		<div class='card' id='prensece-list-add'>
+			<div class='card-view'>
+				<span class='card-view-text' style='font-size: 10em'>+</span>
+			</div>
+			<div class='card-text'>
+				Add presence
+			</div>
+		</div>
+	</div>
+</template>
+
+<template id='template-presences-presence'>
+	<div class='presence-settings'>
+		<div id='presence-settings'>
+			<h1 style='display: inline;'>Presence Settings</h1>
+			<span class='input-text-title'>RPC NAME</span>
+			<span class='input-text-description'>name with which the presence will be shown in the list</span>
+			<input type='text' class='input-text' placeholder='Obligatory'>
+			<span class='input-text-title'>REPRESENTATION IMAGE</span>
+			<span class='input-text-description'>Image with which the presence will be shown in the list</span>
+			<div class='input-file'>
+				<input type='file'> <!--Set an style for this-->
+			</div>
+		</div>
+		<div id='presence-form'>
+			<h1>Presence Form</h1>
+			<span class='input-text-title'>APPLICATION ID</span>
+			<input type='text' class='input-text' id='presence-form-id' placeholder='Obligatory'>
+			<span class='input-text-title'>STATE</span>
+			<input type='text' class='input-text' id='presence-form-state' placeholder='Obligatory if DETAILS is present'>
+			<span class='input-text-title'>DETAILS</span>
+			<input type='text' class='input-text' id='presence-form-details' placeholder='Optional'>
+			<div id='presences-settings-main-datetime' class='flex flex-wrap'>
+				<div>
+					<span class='input-text-title'>START TIME</span>
+					<input type="datetime-local" class='input-datetime' id='presence-form-startTimestamp'>
+					<button class='press-button press-button-secondary' title='The datetime will be set when starting the presence'>On start</button>
+					<button class='press-button press-button-danger' title='Reset'>⟳</button>
+				</div>
+				<div>
+					<span class='input-text-title'>END TIME</span>
+					<input type="datetime-local" class='input-datetime' id='presence-form-endTimestamp'>
+					<button class='press-button press-button-danger' title='Reset'>⟳</button>
+				</div>
+			</div>
+			<span class='input-text-title'>SMALL IMAGE KEY</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-form-smallImageKey'>
+			<span class='input-text-title'>SMALL IMAGE TEXT</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-form-smallImageText'>
+			<span class='input-text-title'>LARGE IMAGE KEY</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-form-largeImageKey'>
+			<span class='input-text-title'>LARGE IMAGE NAME</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-form-largeImageKey'>
+			<span class='input-text-title'>PARTY SIZE</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-form-partySize'>
+			<span class='input-text-title'>PARTY MAX SIZE</span>
+			<input type='text' class='input-text' placeholder='Optional' id='presence-formn-partyMax'>
+			<!--Buttons option-->
+		</div>
+	</div>
+</template>
+
+<template id='template-settings'>
+	<h1>Settings</h1>
+</template>
+
+<template id='template-documentation'>
+	<h1>Documentation</h1>
+</template>
+
+
+<body class='flex'>
+	<div id='menu'>
+		<div id='menu-title' class='flex'>
+			<img src='../visual/discord1.svg'>
+			RPC MAKER
+		</div>
+		<button class='select-button' id='menu-button-presences'>
+			<svg viewBox="0 0 24 24" name="MoreInfo" class="icon-1qHBsr" width="24" height="24" color="currentColor"><path fill="currentColor" d="M14,17H7v-2h7V17z M17,13H7v-2h10V13z M17,9H7V7h10V9z M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14 c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z"></path></svg>
+			Presences
+		</button>
+		<button class='select-button' id='menu-button-settings'>
+			<svg viewBox="0 0 24 24" name="Fingerprint" class="icon-1qHBsr" width="24" height="24" color="currentColor"><path fill="currentColor" d="M22.7,19l-9.1-9.1c0.9-2.3,0.4-5-1.5-6.9c-2-2-5-2.4-7.4-1.3L9,6L6,9L1.6,4.7c-1.2,2.4-0.7,5.4,1.3,7.4 c1.9,1.9,4.6,2.4,6.9,1.5l9.1,9.1c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.3,22.7,19L22.7,19z"></path></svg>
+			Settings
+		</button>
+		<button class='select-button' id='menu-button-documentation'>
+			<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+			Documentation
+		</button>
+		<span id='menu-separator'></span>
+		<div id='menu-frame'></div>
+	</div>
+	<div id='main-frame'>
+	</div>
+</body>
+<script src='../scripts/home.js'></script>
+</html>

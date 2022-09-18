@@ -1,3 +1,7 @@
+#
+test*.*
+todo.*
+build/
 # Logs
 logs
 *.log
