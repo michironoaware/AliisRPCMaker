@@ -1,5 +1,6 @@
 import { BrowserWindow } from 'electron';
 import path from 'path';
+
 export default function newErrorWindow(): BrowserWindow {
 	const window: BrowserWindow = new BrowserWindow({
 		minWidth: 400,

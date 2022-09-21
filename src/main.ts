@@ -6,7 +6,7 @@ import { startDirectory } from './startDirectory';
 import { SettingsData } from './types';
 
 //TODO: Main should be the windows service, do a separate file for browserwindow,tray and etc.
-startDirectory([
+startDirectory(__dirname, [
 	{
 		type: 'file',
 		id: 'settings.bin',
@@ -20,7 +20,7 @@ startDirectory([
 		type: 'folder',
 		id: 'logs',
 	}
-], __dirname);
+]);
 
 /*
 const __username: string = os.userInfo().username;
