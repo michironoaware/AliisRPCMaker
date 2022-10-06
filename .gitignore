@@ -1,7 +1,9 @@
 #
+__*
 test*.*
 todo.*
 build/
+src/*.js
 # Logs
 logs
 *.log

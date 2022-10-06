@@ -1,1 +1,0 @@
-export type OptionalProperty<T, K extends keyof T> = T & { [Property in K]?: T[Property]; };

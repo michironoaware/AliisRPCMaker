@@ -5,17 +5,19 @@
   "description": "A rich presence maker for Discord",
   "name": "discordrpcmaker",
   "version": "1.0.0",
-  "main": "build/src/main.js",
-  "icon": "visual/discord0.ico",
+  "main": "src/desktop/main.js",
+  "icon": "src/public/visual/discord0.ico",
   "scripts": {
     "test": "electron .",
-    "clean": "rmdir build /s /q",
-    "build": "tsc -p ./tsconfig.json --pretty",
-    "validate": "tsc -p ./tsconfig.json --noEmit --pretty",
+    "clean": "tsc --build --clean",
+    "build": "tsc -p ./tsconfig.json",
+    "buildw": "tsc -p ./tsconfig.json --watch",
+    "validate": "tsc -p ./tsconfig.json --noEmit",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "tailwindcss": "tailwindcss -i ./src/styles/input.css -o ./src/styles/output.css --watch"
+    "css": "tailwindcss -i ./src/public/styles/input.css -o ./src/public/styles/output.css",
+    "cssw": "tailwindcss -i ./src/public/styles/input.css -o ./src/public/styles/output.css --watch"
   },
   "dependencies": {
     "@discordjs/collection": "^1.1.0",

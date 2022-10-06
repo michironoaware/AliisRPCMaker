@@ -19,10 +19,10 @@
         //"@typescript-eslint"
     ],
     "rules": {
-        "indent": [ "error", "tab" ],
-        "linebreak-style": [ "error", "windows" ],
-        "quotes": [ "error", "single" ],
-        "semi": [ "error", "always" ],
+        "indent": [ "warn", "tab" ],
+        "linebreak-style": [ "warn", "windows" ],
+        "quotes": [ "warn", "single" ],
+        "semi": [ "warn", "always" ],
         "no-empty": [ "warn", { "allowEmptyCatch": true }],
         "no-empty-function" : "warn",
         "no-empty-character-class": "warn",

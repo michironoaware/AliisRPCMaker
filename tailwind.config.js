@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ['./src/**/*.{html,js}'],
+	content: ['./src/**/**/*.{html,js,ts}'],
 	theme: {
 		screens: {
 			'sm': '640px',
@@ -12,17 +12,33 @@ module.exports = {
 		},
 		colors: {
 			...colors,
-			'primary': '#5468ff',
+			'white': {
+				'DEFAULT': '#ffffff',
+				'80': '#cccccc',
+				'60': '#999999',
+			},
+			'primary': {
+				'DEFAULT': '#5468ff',
+				'hover': '#4752c4',
+				'active': '#3c45a5',
+			},
 			'secondary': '#4f545c',
 			'danger': '#ed4245',
 			'success': '#3ba55d',
 			'half': {
 				'DEFAULT': '#36393f',
-				'primary': '#36393f',
+				'primary': {
+					'DEFAULT': '#36393f',
+					'hover': '#33363b',
+					'active': '#373a3f',
+				},
 				'secondary': '#2f3136',
 				'tertiary': '#202225',
 				'quaternary': '#42464d',
-			}
+				'quinary': '#18191c',
+				'sextary': '#292b2f',
+			},
+			'fadeOne': '#aaaaab'
 		},
 		fontFamily: {
 			poppins: ['Poppins', 'sans-serif'],
