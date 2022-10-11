@@ -3,10 +3,10 @@ presences
 settings.json
 output.css
 __*
-test*.*
 todo.*
 build/
-src/*.js
+out/
+src/**/*.js
 # Logs
 logs
 *.log

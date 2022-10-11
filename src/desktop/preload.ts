@@ -1,16 +1,14 @@
 import { contextBridge, ipcRenderer } from 'electron';
 
-(async () => {
-	const expose: { [key: string]: any } = {
-		'Directory': async () => await ipcRenderer.invoke('import:Directory'),
-		'Settings': async () => await ipcRenderer.invoke('import:Settings'),
-		'Presences': async () => await ipcRenderer.invoke('import:Presences'),
-		'RPC': async () => await ipcRenderer.invoke('import:RPC'),
-		'Utils': async () => await ipcRenderer.invoke('import:Utils'),
-		'windowMinimize': () => { ipcRenderer.invoke('window-minimize'); },
-		'windowMaximize': () => { ipcRenderer.invoke('window-maximize'); },
-		'windowClose': () => { ipcRenderer.invoke('window-close'); },
-	};
-	
-	for(const k in expose) contextBridge.exposeInMainWorld(k, expose[k]);
-})();
+const expose: { [key: string]: any } = {
+	'windowMinimize': (): Promise<void> => ipcRenderer.invoke('Window:minimize'),
+	'windowMaximize': (): Promise<void> => ipcRenderer.invoke('Window:maximize'),
+	'windowClose': (): Promise<void> => ipcRenderer.invoke('Window:close'),
+	'appQuit': (): Promise<void> => ipcRenderer.invoke('App:quit'),
+
+	'settingsDflt': (): Promise<Object> => ipcRenderer.invoke('Settings:dflt'),
+	'settingsGet': (): Promise<Object> => ipcRenderer.invoke('Settings:get'),
+	'settingsSet': (data: Object): Promise<void> => ipcRenderer.invoke('Settings:set', data),
+};
+
+for(const key in expose) contextBridge.exposeInMainWorld(key, expose[key]);

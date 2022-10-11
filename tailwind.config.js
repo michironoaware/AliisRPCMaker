@@ -25,6 +25,11 @@ module.exports = {
 			'secondary': '#4f545c',
 			'danger': '#ed4245',
 			'success': '#3ba55d',
+			'success2': {
+				'DEFAULT': '#2d7d46',
+				'hover': '#215b32',
+				'active': '#1e532e',
+			},
 			'half': {
 				'DEFAULT': '#36393f',
 				'primary': {
@@ -36,9 +41,13 @@ module.exports = {
 				'tertiary': '#202225',
 				'quaternary': '#42464d',
 				'quinary': '#18191c',
-				'sextary': '#292b2f',
+				'sextenary': '#292b2f',
+				'seventy': '#72767d',
 			},
-			'fadeOne': '#aaaaab'
+			'fade': {
+				'DEFAULT': '#aaaaab',
+				'primary': '#aaaaab',
+			}
 		},
 		fontFamily: {
 			poppins: ['Poppins', 'sans-serif'],
@@ -48,5 +57,7 @@ module.exports = {
 		},
 		extends: {},
 	},
-	plugins: [],
+	plugins: [
+		require('tw-elements/dist/plugin'),
+	],
 };

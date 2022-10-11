@@ -4,16 +4,16 @@ import fs, { Stats } from 'fs';
 export interface FileData {
 	type: 'file';
 	id: string;
-	content?: string | Buffer | undefined;
+	content?: string | Buffer;
 }
 export interface FolderData {
 	type: 'folder';
 	id: string;
-	content?: Array<FileData | FolderData> | undefined;
+	content?: Array<FileData | FolderData>;
 }
 
 export namespace Directory {
-	export function start(actualPath: string, dir: Array<FileData | FolderData>): void {
+	export function init(actualPath: string, dir: Array<FileData | FolderData>): void {
 		dir.forEach((v) => {
 			const p: string = path.join(actualPath, v.id);
 			const s: Stats | undefined = fs.lstatSync(p, { throwIfNoEntry: false });
@@ -30,7 +30,7 @@ export namespace Directory {
 					fs.rmSync(p);
 					fs.mkdirSync(p);
 				}
-				if(v.content) start(p, v.content);
+				if(v.content) init(p, v.content);
 			}
 		});
 	}

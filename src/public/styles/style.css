@@ -14,3 +14,38 @@
 ::-webkit-scrollbar-thumb:active {
 	background-color: #18191c;
 }
+
+.settingsChangedUp {
+	animation-duration: 500ms;
+	animation-name: settingsChangedKfUp;
+	animation-fill-mode: forwards;
+}
+.settingsChangedDown {
+	animation-duration: 500ms;
+	animation-name: settingsChangedKfDown;
+	animation-fill-mode: forwards;
+}
+
+@keyframes settingsChangedKfUp {
+	0% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-4.2rem);
+	}
+	100% {
+		transform: translateY(-4rem);
+	}
+}
+
+@keyframes settingsChangedKfDown {
+	0% {
+		transform: translateY(-4rem);
+	}
+	50% {
+		transform: translateY(-6rem);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}

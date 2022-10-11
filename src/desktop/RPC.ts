@@ -9,7 +9,7 @@ export namespace RPC {
 	export async function startActivity(activity: PresenceData): Promise<void> {
 		stopActivity();
 		const processedActivity: Presence = Presences.processData({ ...activity }); 
-		client = new Client({ transport: Settings.read().transport });
+		client = new Client({ transport: Settings.get().transport });
 		client.on('ready', () => {
 			interval = setInterval(() => {
 				client!.setActivity(processedActivity);
