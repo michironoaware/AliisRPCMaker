@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-	content: ['./src/**/**/*.{html,js,ts}'],
+	content: ['./src/**/*.{html,css,ts,mts,cts}', './src/**/**/*.{html,css,ts,mts,cts}'],
 	theme: {
 		screens: {
 			'sm': '640px',
@@ -12,11 +12,6 @@ module.exports = {
 		},
 		colors: {
 			...colors,
-			'white': {
-				'DEFAULT': '#ffffff',
-				'80': '#cccccc',
-				'60': '#999999',
-			},
 			'primary': {
 				'DEFAULT': '#5468ff',
 				'hover': '#4752c4',

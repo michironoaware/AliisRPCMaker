@@ -1,5 +1,6 @@
 import path from 'path';
 import fs, { Stats } from 'fs';
+import { WatchListener } from 'original-fs';
 
 export interface FileData {
 	type: 'file';
@@ -32,6 +33,18 @@ export namespace Directory {
 				}
 				if(v.content) init(p, v.content);
 			}
+		});
+	}
+	export function watch(path: string, listener: WatchListener<string>) {
+		let last = 0;
+		fs.watch(path, {
+			persistent: true,
+			recursive: true,
+		}, (t, p) => {
+			let now = Date.now();
+			if(now - last < 100) return;
+			listener(t, p);
+			last = now;
 		});
 	}
 }

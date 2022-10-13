@@ -1,6 +1,6 @@
 import { Client, Presence } from 'discord-rpc';
-import { Presences, PresenceData } from './Presences';
-import { Settings } from './Settings';
+import { Presences, PresenceData } from './Presences.cjs';
+import { Settings } from './Settings.cjs';
 
 export namespace RPC {
 	let client: Client | null = null;
@@ -8,7 +8,7 @@ export namespace RPC {
 
 	export async function startActivity(activity: PresenceData): Promise<void> {
 		stopActivity();
-		const processedActivity: Presence = Presences.processData({ ...activity }); 
+		const processedActivity: Presence = Presences.processToData({ ...activity }); 
 		client = new Client({ transport: Settings.get().transport });
 		client.on('ready', () => {
 			interval = setInterval(() => {

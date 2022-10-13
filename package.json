@@ -5,22 +5,23 @@
   "description": "A rich presence maker for Discord",
   "name": "aliisrpcmaker",
   "version": "1.0.0",
-  "main": "src/desktop/main.js",
+  "main": "build/desktop/main.cjs",
   "icon": "src/public/visual/discord0.ico",
   "scripts": {
     "test": "electron .",
     "clean": "tsc --build --clean",
-    "build": "tsc -p ./tsconfig.json",
-    "buildw": "tsc -p ./tsconfig.json --watch",
+    "ts": "tsc -p ./tsconfig.json",
+    "tsw": "tsc -p ./tsconfig.json --watch",
     "validate": "tsc -p ./tsconfig.json --noEmit",
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "css": "tailwindcss -i ./src/public/styles/input.css -o ./src/public/styles/output.css",
-    "cssw": "tailwindcss -i ./src/public/styles/input.css -o ./src/public/styles/output.css --watch"
+    "css": "tailwindcss -i ./src/public/styles/input.css -o ./build/public/styles/output.css",
+    "cssw": "tailwindcss -i ./src/public/styles/input.css -o ./build/public/styles/output.css --watch"
   },
   "dependencies": {
     "@discordjs/collection": "^1.1.0",
+    "@octokit/rest": "^19.0.5",
     "@types/discord-rpc": "^4.0.3",
     "discord-rpc": "^4.0.1",
     "electron-squirrel-startup": "^1.0.0",
