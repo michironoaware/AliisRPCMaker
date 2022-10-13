@@ -3,6 +3,7 @@ import path from 'path';
 import os from 'os';
 
 export namespace Utils {
+
 	export function detectDiscord() {
 		const user: string = os.userInfo().username;
 		return {

@@ -3,6 +3,7 @@ import { Presences, PresenceData } from './Presences.cjs';
 import { Settings } from './Settings.cjs';
 
 export namespace RPC {
+
 	let client: Client | null = null;
 	let interval: NodeJS.Timer | null = null;
 

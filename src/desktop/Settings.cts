@@ -8,6 +8,7 @@ export interface SettingsData {
 }
 
 export namespace Settings {
+
 	const path: string = nodePath.join(__dirname, 'settings.json');
 	export const dflt: SettingsData = {
 		startup: true,
