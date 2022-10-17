@@ -1,4 +1,4 @@
-import { changedSign, settingsChanged } from './settings.mjs';
+import { changedSign, settingsUpdated } from './settings.mjs';
 
 const frameMinimize: HTMLButtonElement = document.getElementById('frame-minimize') as HTMLButtonElement;
 const frameMaximize: HTMLButtonElement = document.getElementById('frame-maximize') as HTMLButtonElement;
@@ -36,7 +36,7 @@ frameClose.addEventListener('click', windowClose);
 
 for(const tab in tabs) {
 	tabs[tab as keyof typeof tabs].menu.addEventListener('click', () => {
-		if(settingsChanged()) {
+		if(settingsUpdated()) {
 			changedSign.classList.remove('settingsChangedShake');
 			setTimeout(() => changedSign.classList.add('settingsChangedShake'), 0);
 			return;

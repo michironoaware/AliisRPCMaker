@@ -2,6 +2,14 @@
 	-webkit-app-region: drag;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input::-webkit-calendar-picker-indicator {
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+
 ::-webkit-scrollbar {
 	width: 1rem;
 }
@@ -90,6 +98,7 @@
 }
 
 /*Make an settingsChangedShake effect on the entire screen*/
+/*Finish presenceForm animations*/
 
 .presenceFormAppear {
 	animation-duration: 100ms;

@@ -18,7 +18,11 @@ module.exports = {
 				'active': '#3c45a5',
 			},
 			'secondary': '#4f545c',
-			'danger': '#ed4245',
+			'danger': {
+				'DEFAULT': '#ed4245',
+				'hover': '#a12d2f',
+				'active': '#8c2729',
+			},
 			'success': '#3ba55d',
 			'success2': {
 				'DEFAULT': '#2d7d46',

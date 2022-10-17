@@ -5,7 +5,6 @@ const resetButton: HTMLButtonElement = document.getElementById('settings-reset')
 const startup: HTMLInputElement = document.getElementById('settings-options-startup') as HTMLInputElement;
 const minimized: HTMLInputElement = document.getElementById('settings-options-minimized') as HTMLInputElement;
 const transport: NodeListOf<HTMLInputElement> = document.getElementsByName('settings-options-transport') as NodeListOf<HTMLInputElement>;
-const allElements = [ startup, minimized, ...transport ];
 let settings: SettingsData = await settingsGet();
 
 function loadSettings() {
@@ -25,7 +24,7 @@ function optionListUpdated(list: NodeListOf<HTMLInputElement>, actualSetting: st
 	for(const element of list) if(element.checked && element.value !== actualSetting) return true;
 	return false;
 }
-export function settingsChanged(): boolean {
+export function settingsUpdated(): boolean {
 	return (
 		startup.checked !== settings.startup ||
 		minimized.checked !== settings.minimized ||
@@ -33,7 +32,7 @@ export function settingsChanged(): boolean {
 	);
 };
 function onChanges(): void {
-	const updated = settingsChanged();
+	const updated = settingsUpdated();
 	changedSign.classList.add(updated ? 'settingsChangedUp' : 'settingsChangedDown');
 	changedSign.classList.remove(updated ? 'settingsChangedDown' : 'settingsChangedUp', 'settingsChangedShake'); 
 	if(!updated) setTimeout(() => changedSign.classList.remove('settingsChangedDown'), 500);
@@ -52,5 +51,6 @@ resetButton.addEventListener('click', () => {
 	loadSettings();
 	onChanges();
 });
-allElements.forEach(element => element.addEventListener('change', onChanges));
+
+[ startup, minimized, ...transport ].forEach(element => element.addEventListener('click', onChanges));
 loadSettings();

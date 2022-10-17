@@ -1,12 +1,11 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
-const { execSync } = require('child_process');
-const inPath = path.join(__dirname, 'src');
-const outPath = path.join(__dirname, 'build');
+const srcPath = path.join(__dirname, 'src');
+const buildPath = path.join(__dirname, 'build');
 
 const start = Date.now();
-fse.copySync(inPath, outPath, {
+fse.copySync(srcPath, buildPath, {
 	overwrite: true,
 	filter: i => (
 		!i.endsWith('.ts') &&
@@ -18,16 +17,18 @@ fse.copySync(inPath, outPath, {
 const end = Date.now();
 console.log(`Done in ${end - start}ms.`);
 
-if(process.argv.find(v => v === '--watch' || v === '-W')) {
+if(process.argv.find(v => v === '--watch' || v === '-w')) {
 	console.log('Watching for changes.');
 	let last = 0;
-	fs.watch(inPath, {
+	fs.watch(srcPath, {
 		persistent: true,
 		recursive: true,
-	}, (t, p) => {
+	}, async (t, p) => {
 		const start = Date.now();
 		if(start - last < 250) return;
-		fse.copySync(inPath, outPath, {
+		const src = path.join(__dirname, 'src', p);
+		const build = path.join(__dirname, 'build', p);
+		fse.copySync(src, build, {
 			overwrite: true,
 			filter: i => (
 				!i.endsWith('.ts') &&

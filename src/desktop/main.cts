@@ -19,7 +19,7 @@ Directory.init(__dirname, [
 	},
 ]);
 
-const discordIcon: NativeImage = nativeImage.createFromPath(path.join(__dirname, '../public/visual/discord0.ico')).resize({ 'width': 16 });
+const discordIcon: NativeImage = nativeImage.createFromPath(path.join(__dirname, '../public/assets/discord0.ico')).resize({ 'width': 16 });
 app.whenReady().then(() => {
 	const window: BrowserWindow = new BrowserWindow({
 		minWidth: 950,
