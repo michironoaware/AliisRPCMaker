@@ -4,6 +4,7 @@ const buildPath = path.join(__dirname, 'build');
 const minify = require('@node-minify/core');
 const html = require('@node-minify/html-minifier');
 const css = require('@node-minify/clean-css');
+const js = require('@node-minify/uglify-js');
 
 async function recursiveMinify(p) {
 	const s = fs.lstatSync(p, { throwIfNoEntry: false });
@@ -15,6 +16,7 @@ async function recursiveMinify(p) {
 		let compressor;
 		if(p.endsWith('.html')) compressor = html;
 		else if(p.endsWith('.css')) compressor = css;
+		else if(p.endsWith('.js') || p.endsWith('.mjs') || p.endsWith('.cjs')) compressor = js;
 		try {
 			if(compressor) await minify({
 				compressor,
@@ -43,6 +45,7 @@ if(process.argv.find(v => v === '--watch' || v === '-w')) {
 		let compressor;
 		if(p.endsWith('.html')) compressor = html;
 		else if(p.endsWith('.css')) compressor = css;
+		else if(p.endsWith('.js') || p.endsWith('.mjs') || p.endsWith('.cjs')) compressor = js;
 		try {
 			if(compressor) setTimeout(async () => await minify({
 				compressor,

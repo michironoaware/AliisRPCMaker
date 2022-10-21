@@ -34,7 +34,7 @@ app.whenReady().then(() => {
 		},
 		show: !Settings.get().minimized,
 	});
-	window.loadFile(path.join(__dirname, '../public/views/index.html'));
+	window.loadFile(path.join(__dirname, '../public/views/frame.html'));
 
 	const tray: Tray = new Tray(discordIcon);
 	tray.setToolTip('Aliis RPC Maker');

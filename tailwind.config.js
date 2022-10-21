@@ -17,7 +17,11 @@ module.exports = {
 				'hover': '#4752c4',
 				'active': '#3c45a5',
 			},
-			'secondary': '#4f545c',
+			'secondary': {
+				'DEFAULT': '#4f545c',
+				'hover:': '',
+				'active': '',
+			}, /*TODO add hover & active*/
 			'danger': {
 				'DEFAULT': '#ed4245',
 				'hover': '#a12d2f',
