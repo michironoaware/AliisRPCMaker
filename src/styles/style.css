@@ -1,0 +1,129 @@
+#frame-free {
+	-webkit-app-region: drag;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input::-webkit-calendar-picker-indicator {
+	-webkit-appearance: none;
+	appearance: none;
+	display: none;
+}
+
+::-webkit-scrollbar {
+	width: 1rem;
+}
+::-webkit-scrollbar-track:hover {
+	background: #2f3136;
+}
+::-webkit-scrollbar-thumb {
+	background: #2f3136;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #202225;
+}
+::-webkit-scrollbar-thumb:active {
+	background: #18191c;
+}
+
+.popupChangedUp {
+	animation-duration: 500ms;
+	animation-name: popupChangedUp;
+	animation-fill-mode: forwards;
+}
+@keyframes popupChangedUp {
+	0% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-4.2rem);
+	}
+	100% {
+		transform: translateY(-4rem);
+	}
+}
+
+.popupChangedDown {
+	animation-duration: 500ms;
+	animation-name: popupChangedDown;
+	animation-fill-mode: forwards;
+}
+@keyframes popupChangedDown {
+	0% {
+		transform: translateY(-4rem);
+	}
+	50% {
+		transform: translateY(-6rem);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+.popupChangedShake {
+	animation-duration: 500ms;
+	animation-name: popupChangedShake;
+	animation-fill-mode: both;
+}
+@keyframes popupChangedShake {
+	0% {
+		transform: translate(-1rem, -4rem);
+	}
+	10% {
+		background: #ed4245;
+		transform: translate(1rem, -4rem);
+	}
+	20% {
+		transform: translate(-0.75rem, -4rem);
+	}
+	30% {
+		transform: translate(0.75rem, -4rem);
+	}
+	40% {
+		transform: translate(-0.5rem, -4rem);
+	}
+	50% {
+		background: #ed4245;
+		transform: translate(0.5rem, -4rem);
+	}
+	60% {
+		transform: translate(-0.25rem, -4rem);
+	}
+	80% {
+		transform: translate(0.25rem, -4rem);
+	}
+	100% {
+		transform: translate(0rem, -4rem);
+	}
+}
+
+/*Make an popupChangedShake effect on the entire screen*/
+/*Finish presenceForm animations*/
+
+.presenceFormAppear {
+	animation-duration: 100ms;
+	animation-name: presenceFormAppear;
+	animation-fill-mode: backwards;
+}
+@keyframes presenceFormAppear {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.presenceFormDisappear {
+
+	animation-duration: 100ms;
+	animation-name: presenceFormDisappear;
+	animation-fill-mode: forwards;
+}
+@keyframes presenceFormDisappear {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
