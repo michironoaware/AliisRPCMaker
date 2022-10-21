@@ -5,8 +5,8 @@
   "description": "A rich presence maker for Discord",
   "name": "aliisrpcmaker",
   "version": "1.0.0",
-  "main": "build/desktop/main.cjs",
-  "icon": "src/public/assets/discord0.ico",
+  "main": "build/main/main.js",
+  "icon": "src/assets/discord0.ico",
   "scripts": {
     "test": "electron .",
     "clean": "tsc --build --clean",
@@ -16,8 +16,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "css": "tailwindcss -i ./src/public/styles/input.css -o ./build/public/styles/output.css",
-    "cssw": "tailwindcss -i ./src/public/styles/input.css -o ./build/public/styles/output.css --watch"
+    "css": "tailwindcss -i ./src/styles/input.css -o ./build/styles/output.css",
+    "cssw": "tailwindcss -i ./src/styles/input.css -o ./build/styles/output.css --watch"
   },
   "dependencies": {
     "@discordjs/collection": "^1.1.0",

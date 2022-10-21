@@ -17,28 +17,32 @@ fse.copySync(srcPath, buildPath, {
 const end = Date.now();
 console.log(`Done in ${end - start}ms.`);
 
-if(process.argv.find(v => v === '--watch' || v === '-w')) {
+function waitingForChanges() {
 	console.log('Watching for changes.');
 	let last = 0;
 	fs.watch(srcPath, {
 		persistent: true,
 		recursive: true,
 	}, async (t, p) => {
-		const start = Date.now();
-		if(start - last < 250) return;
-		const src = path.join(__dirname, 'src', p);
-		const build = path.join(__dirname, 'build', p);
-		fse.copySync(src, build, {
-			overwrite: true,
-			filter: i => (
-				!i.endsWith('.ts') &&
-				!i.endsWith('.cts') &&
-				!i.endsWith('.mts') &&
-				!i.includes('input.css')
-			)
-		});
-		const end = Date.now();
-		last = end;
-		console.log(`Done in ${end - start}ms.`);
+		try {
+			const start = Date.now();
+			if(start - last < 250) return;
+			const src = path.join(__dirname, 'src', p);
+			const build = path.join(__dirname, 'build', p);
+			fse.copySync(src, build, {
+				overwrite: true,
+				filter: i => (
+					!i.endsWith('.ts') &&
+					!i.endsWith('.cts') &&
+					!i.endsWith('.mts') &&
+					!i.includes('input.css')
+				)
+			});
+			const end = Date.now();
+			last = end;
+			console.log(`Done in ${end - start}ms.`);
+		} catch(e) { console.error(e); }
 	});
 }
+
+if(process.argv.find(v => v === '--watch' || v === '-w')) waitingForChanges();

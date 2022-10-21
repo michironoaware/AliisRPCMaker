@@ -39,22 +39,24 @@ if(process.argv.find(v => v === '--watch' || v === '-w')) {
 		persistent: true,
 		recursive: true,
 	}, async (t, p) => {
-		const start = Date.now();
-		if(start - last < 250) return;
-		const build = path.join(__dirname, 'build', p);
-		let compressor;
-		if(p.endsWith('.html')) compressor = html;
-		else if(p.endsWith('.css')) compressor = css;
-		else if(p.endsWith('.js') || p.endsWith('.mjs') || p.endsWith('.cjs')) compressor = js;
 		try {
-			if(compressor) setTimeout(async () => await minify({
-				compressor,
-				input: build,
-				output: build,
-			}), 100);
-		} catch(e) { console.log(e); }
-		const end = Date.now();
-		last = end;
-		console.log(`Done in ${end - start}ms.`);
+			const start = Date.now();
+			if(start - last < 250) return;
+			const build = path.join(__dirname, 'build', p);
+			let compressor;
+			if(p.endsWith('.html')) compressor = html;
+			else if(p.endsWith('.css')) compressor = css;
+			else if(p.endsWith('.js') || p.endsWith('.mjs') || p.endsWith('.cjs')) compressor = js;
+			try {
+				if(compressor) setTimeout(async () => await minify({
+					compressor,
+					input: build,
+					output: build,
+				}), 100);
+			} catch(e) { console.error(e); }
+			const end = Date.now();
+			last = end;
+			console.log(`Done in ${end - start}ms.`);
+		} catch(e) { console.error(e); }
 	});
 }
