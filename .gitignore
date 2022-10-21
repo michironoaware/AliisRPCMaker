@@ -5,6 +5,7 @@ output.css
 __*
 todo.*
 build/
+data/
 out/
 src/**/*.js
 # Logs
