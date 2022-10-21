@@ -2,7 +2,6 @@ const newPresenceButton: HTMLButtonElement = document.getElementById('presences-
 const newPresenceFrame: HTMLDivElement = document.getElementById('presences-new-frame') as HTMLDivElement;
 const presenceList: HTMLDivElement = document.getElementById('presences-list') as HTMLDivElement;
 
-
 function card(name: string, img?: string): string { 
 	return `
 	<div class='bg-half-secondary flex flex-col box-border p-[0.6rem] rounded-md w-[9.2rem] h-[11.2rem] cursor-pointer transition-all duration-[150ms] hover:bg-half-sextenary hover:shadow-[0_0.5em_1em_0.2em_#00000020] hover:translate-y-[-0.5em]'>
