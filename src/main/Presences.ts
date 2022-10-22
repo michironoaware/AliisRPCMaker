@@ -11,8 +11,8 @@ export interface PresenceData {
 	id: string;
 	state: string;
 	details: string;
-	startTimestamp: string;
-	endTimestamp: string;
+	startTimestamp: number | null;
+	endTimestamp: number | null;
 	largeImageKey: string ;
 	largeImageText: string;
 	smallImageKey: string;
@@ -33,7 +33,12 @@ export interface PresenceCreateOptions {
 	name: string;
 	image?: string;
 }
-
+export interface PresenceEditOptions {
+	name: string;
+	oldName: string;
+	image?: string;
+	data: PresenceData;
+}
 
 export namespace Presences {
 
@@ -41,8 +46,8 @@ export namespace Presences {
 		id: '',
 		state: '',
 		details: '',
-		startTimestamp: '',
-		endTimestamp: '',
+		startTimestamp: null,
+		endTimestamp: null,
 		largeImageKey: '',
 		largeImageText: '',
 		smallImageKey: '',
@@ -67,7 +72,7 @@ export namespace Presences {
 		const presences: Array<Presence> = [];
 		const presenceFolder: Array<string> = fs.readdirSync(nodePath.join(Config.path, 'data/presences'));
 		presenceFolder.forEach((v) => {
-			presences.push(Presences.get(v));
+			presences.push(Presences.get(v)!);
 		});
 		return presences;
 	}
@@ -88,12 +93,19 @@ export namespace Presences {
 		fs.writeFileSync(nodePath.join(Config.path, 'data/presences', options.name, 'data.json'), JSON.stringify({ ...dflt, id: options.id }));
 		if(options.image) fs.copyFileSync(options.image, nodePath.join(Config.path, 'data/presences', options.name, 'image'));
 	}
+	export function edit(presence: PresenceEditOptions): void {
+		if(presence.oldName !== presence.name) fs.renameSync(nodePath.join(Config.path, 'data/presences', presence.oldName), nodePath.join(Config.path, 'data/presences', presence.name));
+		fs.writeFileSync(nodePath.join(Config.path, 'data/presences', presence.name, 'data.json'), JSON.stringify({ ...dflt, ...presence.data }));
+		if(presence.image) fs.copyFileSync(presence.image, nodePath.join(Config.path, 'data/presences', presence.name, 'image'));
+	}
 	export function remove(name: string): void {
 		fs.rmSync(nodePath.join(Config.path, 'data/presences', name));
 	}
-	export function processToData(activity: PresenceData): PresenceRPC {
+
+	/*TODO*/
+	/*export function processToData(activity: PresenceData): PresenceRPC {
 		if(activity.startTimestamp === 'start') activity.startTimestamp = Date.now();
 	
 		return activity as PresenceRPC;
-	}
+	}*/
 }

@@ -41,7 +41,7 @@ app.whenReady().then(() => {
 			nodeIntegration: true,
 		},
 	});
-	window.loadFile(path.join(__dirname, '../views/presences.html'));
+	window.loadFile(path.join(__dirname, '../views/frame.html'));
 
 	const tray: Tray = new Tray(discordIcon);
 	tray.setToolTip('Aliis RPC Maker');

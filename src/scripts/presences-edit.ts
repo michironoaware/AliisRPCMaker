@@ -18,7 +18,7 @@ const buttonTwoInputs: Array<HTMLInputElement> = [
 	document.getElementById('presences-edit-data-button2-url') as HTMLInputElement
 ];
 
-const imageView = document.getElementById('presences-edit-image') as HTMLImageElement;
+const imageView: HTMLImageElement = document.getElementById('presences-edit-image') as HTMLImageElement;
 
 const inputs = {
 	name: document.getElementById('presences-edit-name') as HTMLInputElement,
@@ -42,13 +42,14 @@ const inputs = {
 	buttonTwoEnabled: document.getElementById('presences-edit-data-button2-enabled') as HTMLInputElement,
 };
 
-const params = new URLSearchParams(window.location.search);
-let presence = Presences.get(params.get('name')!);
-let presenceImage = path.join(presence!.path, 'image');
+let presenceName: string = new URLSearchParams(window.location.search).get('name')!;
+let presence: Presence | undefined = Presences.get(presenceName);
+if(!presence) window.location.href = './presences.html';
+let presenceImage: string = path.join(presence!.path, 'image');
 
 function loadPresence() {
+	inputs.image.value = '';
 	if(!presence) window.location.href = './presences.html';
-	imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
 	inputs.name.value = presence!.name;
 	inputs.id.value = presence!.data.id;
 	inputs.state.value = presence!.data.state;
@@ -59,8 +60,8 @@ function loadPresence() {
 	inputs.smallImageText.value = presence!.data.smallImageText;
 	inputs.partySize.value = presence!.data.partySize;
 	inputs.partyMax.value = presence!.data.partyMax;
-	inputs.startTimestamp.valueAsNumber = presence!.data.startTimestamp ? Number.parseInt(presence!.data.startTimestamp) : NaN;
-	inputs.endTimestamp.valueAsNumber = presence!.data.endTimestamp ? Number.parseInt(presence!.data.endTimestamp) : NaN;
+	inputs.startTimestamp.valueAsNumber = presence!.data.startTimestamp ?? NaN;
+	inputs.endTimestamp.valueAsNumber = presence!.data.endTimestamp ?? NaN;
 	inputs.buttonOneLabel.value = presence!.data.buttons[0].label;
 	inputs.buttonOneUrl.value = presence!.data.buttons[0].url;
 	inputs.buttonTwoLabel.value = presence!.data.buttons[1].label;
@@ -70,10 +71,10 @@ function loadPresence() {
 	inputs.buttonTwoEnabled.checked = presence!.data.buttonTwoEnabled;
 }
 
-function presencesUpdated() {
+function presencesUpdated(): boolean {
 	return (
 		inputs.name.value !== presence!.name ||
-		(inputs.image.files?.[0]?.path ?? presenceImage) !== presenceImage ||
+		inputs.image.value !== '' ||
 		inputs.id.value !== presence!.data.id ||
 		inputs.state.value !== presence!.data.state ||
 		inputs.details.value !== presence!.data.details ||
@@ -83,8 +84,8 @@ function presencesUpdated() {
 		inputs.smallImageText.value !== presence!.data.smallImageText ||
 		inputs.partySize.value !== presence!.data.partySize ||
 		inputs.partyMax.value !== presence!.data.partyMax ||
-		(inputs.startTimestamp.valueAsNumber !== Number.parseInt(presence!.data.startTimestamp) && !(isNaN(inputs.startTimestamp.valueAsNumber) && isNaN(Number.parseInt(presence!.data.startTimestamp)))) ||
-		(inputs.endTimestamp.valueAsNumber !== Number.parseInt(presence!.data.endTimestamp) && !(isNaN(inputs.endTimestamp.valueAsNumber) && isNaN(Number.parseInt(presence!.data.endTimestamp)))) ||
+		inputs.startTimestamp.valueAsNumber !== (presence!.data.startTimestamp ?? NaN) && !(isNaN(inputs.startTimestamp.valueAsNumber) && isNaN(presence!.data.startTimestamp ?? NaN)) ||
+		inputs.endTimestamp.valueAsNumber !== (presence!.data.endTimestamp ?? NaN) && !(isNaN(inputs.endTimestamp.valueAsNumber) && isNaN(presence!.data.endTimestamp ?? NaN)) ||
 		inputs.buttonOneLabel.value !== presence!.data.buttons[0].label ||
 		inputs.buttonOneUrl.value !== presence!.data.buttons[0].url ||
 		inputs.buttonOneEnabled.checked !== presence!.data.buttonOneEnabled ||
@@ -95,10 +96,16 @@ function presencesUpdated() {
 }
 
 function onChanges(): void {
-	const updated = presencesUpdated();
-	changedSign.classList.add(updated ? 'popupChangedUp' : 'popupChangedDown');
-	changedSign.classList.remove(updated ? 'popupChangedDown' : 'popupChangedUp', 'popupChangedShake'); 
-	if(!updated) setTimeout(() => changedSign.classList.remove('popupChangedDown'), 500);
+	const updated: boolean = presencesUpdated();
+	if(updated && !changedSign.classList.contains('popupChangedUp')) {
+		changedSign.classList.remove('popupChangedDown');
+		changedSign.classList.add('popupChangedUp');
+	}
+	else if(!updated && changedSign.classList.contains('popupChangedUp')) {
+		changedSign.classList.remove('popupChangedUp');
+		changedSign.classList.add('popupChangedDown');
+		if(!updated) setTimeout(() => changedSign.classList.remove('popupChangedDown'), 500);
+	} 
 }
 
 inputs.buttonOneEnabled.addEventListener('change', () => {
@@ -136,6 +143,49 @@ inputs.buttonTwoEnabled.addEventListener('change', () => {
 inputs.image.addEventListener('change', () => imageView.src = inputs.image.files?.[0]?.path ?? presenceImage);
 Object.values(inputs).forEach(e => e.addEventListener('change', onChanges));
 Object.values(inputs).forEach(e => e.addEventListener('input', onChanges));
-loadPresence();
+saveButton.addEventListener('click', () => {
+	Presences.edit({
+		name: inputs.name.value,
+		oldName: presenceName,
+		image: inputs.image.files?.[0]?.path,
+		data: {
+			id: inputs.id.value,
+			state: inputs.state.value,
+			details: inputs.details.value,
+			largeImageKey: inputs.largeImageKey.value,
+			largeImageText: inputs.largeImageText.value,
+			smallImageKey: inputs.smallImageKey.value,
+			smallImageText: inputs.smallImageText.value,
+			partySize: inputs.partySize.value,
+			partyMax: inputs.partyMax.value,
+			startTimestamp: inputs.startTimestamp.valueAsNumber ?? null,
+			endTimestamp: inputs.endTimestamp.valueAsNumber ?? null,
+			buttons: [
+				{
+					label: inputs.buttonOneLabel.value,
+					url: inputs.buttonOneUrl.value,
+				},
+				{
+					label: inputs.buttonTwoLabel.value,
+					url: inputs.buttonTwoUrl.value,
+				},
+			],
+			buttonOneEnabled: inputs.buttonOneEnabled.checked,
+			buttonTwoEnabled: inputs.buttonTwoEnabled.checked,
+		}
+	});
+	presenceName = inputs.name.value;
+	presence = Presences.get(presenceName);
+	presenceImage = path.join(presence!.path, 'image');
+	loadPresence();
+	onChanges();
+});
 
-//DO SAVE
+resetButton.addEventListener('click', () => {
+	imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
+	loadPresence();
+	onChanges();
+});
+
+imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
+loadPresence();

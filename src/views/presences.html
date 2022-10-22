@@ -45,8 +45,10 @@
 	</header>
 	<div id='main' class='h-full w-full p-[2rem] box-border overflow-y-scroll bg-half-primary'>
 		<!--TODO no discord => disable start presence-->
-		<button id='presences-new' class='float-right px-[1.25rem] py-[0.5rem] rounded outline-none text-sm bg-primary transition-colors duration-200 hover:bg-primary-hover active:bg-primary-active'>New Presence</button>
-		<h1 class='text-[2rem] font-semibold'>Presences</h1>
+		<div class='flex flex-row items-center'>
+			<h1 class='w-full text-[2rem] font-semibold'>Presences</h1>
+			<button id='presences-new' class='min-w-max float-right px-[1.25rem] py-[0.5rem] rounded outline-none text-sm bg-primary transition-colors duration-200 hover:bg-primary-hover active:bg-primary-active'>New Presence</button>
+		</div>
 		<p class='text-white text-opacity-60 font-light'>Presences are the best way to show what are you doing!</p>
 		<h2 class='text-[1.5rem] font-medium my-[1rem]'>My Presences</h2>
 		<!--TODO Add list style selection & row-col style-->

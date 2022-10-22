@@ -7,6 +7,7 @@ export namespace RPC {
 	let client: Client | null = null;
 	let interval: NodeJS.Timer | null = null;
 
+	/*TODO*//*
 	export async function startActivity(activity: PresenceData): Promise<void> {
 		stopActivity();
 		const processedActivity: Presence = Presences.processToData({ ...activity }); 
@@ -26,5 +27,5 @@ export namespace RPC {
 			client.destroy();
 			client = null;
 		}
-	}
+	}*/
 }

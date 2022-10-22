@@ -34,10 +34,16 @@ function settingsUpdated(): boolean {
 	);
 };
 function onChanges(): void {
-	const updated = settingsUpdated();
-	changedSign.classList.add(updated ? 'popupChangedUp' : 'popupChangedDown');
-	changedSign.classList.remove(updated ? 'popupChangedDown' : 'popupChangedUp', 'popupChangedShake'); 
-	if(!updated) setTimeout(() => changedSign.classList.remove('popupChangedDown'), 500);
+	const updated: boolean = settingsUpdated();
+	if(updated && !changedSign.classList.contains('popupChangedUp')) {
+		changedSign.classList.remove('popupChangedDown');
+		changedSign.classList.add('popupChangedUp');
+	}
+	else if(!updated && changedSign.classList.contains('popupChangedUp')) {
+		changedSign.classList.remove('popupChangedUp');
+		changedSign.classList.add('popupChangedDown');
+		if(!updated) setTimeout(() => changedSign.classList.remove('popupChangedDown'), 500);
+	} 
 }
 
 saveButton.addEventListener('click', async () => {
