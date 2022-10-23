@@ -1,8 +1,10 @@
 import path from 'path';
-import { app, ipcMain, BrowserWindow, Tray, Menu, nativeImage, NativeImage, IpcMainInvokeEvent, Task } from 'electron';
+import { app, ipcMain, BrowserWindow, Tray, Menu, nativeImage, NativeImage, IpcMainInvokeEvent } from 'electron';
 import { Directory } from './Directory.js';
 import { Settings } from './Settings.js';
-import { Presences } from './Presences.js';
+
+const gotTheLock: boolean = app.requestSingleInstanceLock();
+if(!gotTheLock) app.quit();
 
 Directory.init(path.join(__dirname, '../../'), [
 	{
@@ -25,6 +27,9 @@ Directory.init(path.join(__dirname, '../../'), [
 var window: BrowserWindow;
 const discordIcon: NativeImage = nativeImage.createFromPath(path.join(__dirname, '../assets/discord0.ico')).resize({ 'width': 16 });
 
+app.on('window-all-closed', app.quit);
+app.on('second-instance', () => window.show());
+
 app.whenReady().then(() => {
 	window = new BrowserWindow({
 		minWidth: 950,
@@ -33,9 +38,8 @@ app.whenReady().then(() => {
 		center: true,
 		fullscreenable: false,
 		icon: discordIcon,
-		show: !Settings.get().minimized,
 		webPreferences: {
-			devTools: false,
+			//devTools: false,
 			webviewTag: true,
 			contextIsolation: false,
 			sandbox: false,
@@ -68,9 +72,7 @@ app.whenReady().then(() => {
 		'window.minimize': (): void => window.minimize(),
 		'window.maximize': (): void => window.isMaximized() ? window.unmaximize() : window.maximize(),
 		'window.hide': (): void => window.hide(),
+		'app.quit': (): void => app.quit(),
 	};
 	for(const key in handle) ipcMain.handle(key, handle[key]);
 });
-
-app.on('window-all-closed', app.quit);
-app.on('activate', () => window.show);

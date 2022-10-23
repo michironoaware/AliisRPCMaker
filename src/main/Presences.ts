@@ -110,10 +110,7 @@ export namespace Presences {
 	export function process(activity: PresenceData): ClientPresence {
 		const partySize: string | undefined = activity.partySize ? activity.partySize.toString() : undefined;
 		const partyMax: string | undefined = activity.partyMax ? activity.partyMax.toString() : undefined;
-		const buttons: Array<{
-			label: string;
-			url: string;
-		}> = [];
+		const buttons: Array<{ label: string; url: string; }> = [];
 		if(activity.buttonOneEnabled) buttons.push({
 			label: activity.buttons[0].label,
 			url: activity.buttons[0].url,

@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { Directory } from '../main/Directory';
 import { Presence, Presences } from '../main/Presences';
-import { Settings } from '../main/Settings';
 
 
 const newPresenceButton: HTMLButtonElement = document.getElementById('presences-new') as HTMLButtonElement;
