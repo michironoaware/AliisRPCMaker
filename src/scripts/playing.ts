@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { Config } from '../main/Config';
+import { Directory } from '../main/Directory';
 import { Presence, Presences } from '../main/Presences';
 import { RPC } from '../main/RPC';
 
@@ -13,6 +15,23 @@ const stop: HTMLButtonElement = document.getElementById('menu-playing-stop') as 
 const select: HTMLDivElement = document.getElementById('menu-playing-select') as HTMLDivElement;
 const selectList: HTMLDivElement = document.getElementById('menu-playing-select-list') as HTMLDivElement;
 
+
+function updatePresenceList() {
+	const presences: Array<Presence> = Presences.getAll();
+	selectList.innerHTML = '';
+	if(presences.length > 0) {
+		presences.forEach(presence => {
+			const button: HTMLButtonElement = document.createElement('button');
+			button.innerHTML = createPresenceSelection(presence);
+			button.addEventListener('mousedown', () => {
+				RPC.startActivity(presence);
+				activityStarted();
+			});
+			selectList.appendChild(button);
+		});
+	}
+	else selectList.insertAdjacentHTML('beforeend', '<button class="w-full p-[0.5rem] bg-half-sextenary hover:bg-half-secondary text-sm text-start text-white text-opacity-60 cursor-not-allowed truncate transition-colors duration-100">You don\'t have any</button>');
+}
 function createPresenceSelection(presence: Presence): string {
 	return `<button class='w-full p-[0.5rem] bg-half-sextenary hover:bg-half-secondary text-sm text-start text-white text-opacity-90 cursor-pointer truncate transition-colors duration-100'>${presence.name}</button>`.trim();
 }
@@ -47,16 +66,8 @@ stop.addEventListener('click', () => {
 });
 select.addEventListener('focusin', () => selectList.classList.remove('!hidden'));
 select.addEventListener('focusout', () => selectList.classList.add('!hidden'));
-const presences: Array<Presence> = Presences.getAll();
-if(presences.length > 0) presences.forEach(presence => {
-	const button: HTMLButtonElement = document.createElement('button');
-	button.innerHTML = createPresenceSelection(presence);
-	button.addEventListener('mousedown', () => {
-		RPC.startActivity(presence);
-		activityStarted();
-	});
-	selectList.appendChild(button);
-});
-else selectList.insertAdjacentHTML('beforeend', '<button class="w-full p-[0.5rem] bg-half-sextenary hover:bg-half-secondary text-sm text-start text-white text-opacity-60 cursor-not-allowed truncate transition-colors duration-100">You don\'t have any</button>');
 
+Directory.watch(path.join(Config.path, 'data/presences'), updatePresenceList);
+
+updatePresenceList();
 if(RPC.client) activityStarted();

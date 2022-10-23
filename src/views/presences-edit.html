@@ -39,9 +39,19 @@
 		<input id='presences-edit-data-id' type='number' class='appearance-none w-full p-[0.5rem] my-[0.20rem] outline-none bg-half-tertiary rounded font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='The ID of the registered Discord app'>
 		<!--TODO: maxlength-->
 		<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>STATE</h2>
-		<input id='presences-edit-data-state' type='text' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='What are you doing?'>
+		<input id='presences-edit-data-state' type='text' maxlength='1000' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='What are you doing?'>
 		<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>DETAILS</h2>
-		<input id='presences-edit-data-details' type='text' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='Tell us more about what you do!'>
+		<input id='presences-edit-data-details' type='text' maxlength='1000' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='Tell us more about what you do!'>
+		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem]'>
+			<div>							
+				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>CURRENT PARTY SIZE</h2>
+				<input id='presences-edit-data-partySize' type='number' class='w-full p-[0.625rem] my-[0.2rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='How many people are with you?'>
+			</div>
+			<div>
+				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>MAX PARTY SIZE</h2>
+				<input id='presences-edit-data-partyMax' type='number' class='w-full p-[0.625rem] my-[0.2rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='How many people can there be at the same time?'>
+			</div>
+		</div>
 		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem]'>
 			<div>
 				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>LARGE IMAGE KEY</h2>
@@ -49,7 +59,7 @@
 			</div>
 			<div>
 				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>LARGE IMAGE TEXT</h2>
-				<input id='presences-edit-data-largeImageText' type='text' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='Text displayed on hover'>		
+				<input id='presences-edit-data-largeImageText' maxlength='128' type='text' class='w-full p-[0.625rem] my-[0.25rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='Text displayed on hover'>		
 			</div>
 		</div>
 		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem]'>
@@ -63,23 +73,13 @@
 			</div>
 		</div>
 		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem]'>
-			<div>							
-				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>PARTY SIZE</h2>
-				<input id='presences-edit-data-partySize' type='number' class='w-full p-[0.625rem] my-[0.2rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='How many people are with you?'>
+			<div>
+				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>TIME PLAYING - Started ago</h2>
+				<input id='presences-edit-data-startTimestamp' type='time' step='1' class='w-full my-[0.2rem] font-robotomono font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded'>
 			</div>
 			<div>
-				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>PARTY MAX</h2>
-				<input id='presences-edit-data-partyMax' type='number' class='w-full p-[0.625rem] my-[0.2rem] outline-none bg-half-tertiary rounded text-sm text-white text-opacity-90 font-light placeholder:text-white placeholder:text-sm placeholder:text-opacity-40' placeholder='How many people can there be at the same time?'>
-			</div>
-		</div>
-		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem]'>
-			<div>
-				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>START TIMESTAMP</h2>
-				<input id='presences-edit-data-startTimestamp' type='datetime-local' class='w-full my-[0.2rem] font-robotomono font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded'>
-			</div>
-			<div>
-				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>END TIMESTAMP</h2>
-				<input id='presences-edit-data-endTimestamp' type='datetime-local' class='w-full my-[0.2rem] font-robotomono font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded'>
+				<h2 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>TIME PLAYING - Finished in</h2>
+				<input id='presences-edit-data-endTimestamp' type='time' step='1' class='w-full my-[0.2rem] font-robotomono font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded'>
 			</div>
 		</div>
 		<div class='w-full [&>div]:w-full flex flex-row gap-[1rem] transition-opacity duration-200'>
@@ -88,11 +88,11 @@
 					<h2 class='w-full text-[1.25rem] font-semibold text-white my-[0.20rem] truncate'>First Button</h2>
 					<input id='presences-edit-data-button1-enabled' type='checkbox' class='inline-block appearance-none mr-[0.5rem] w-[2.75rem] h-[1.5rem] min-w-[2.75rem] outline-none rounded-full bg-half-seventy transition-colors duration-200 checked:bg-success cursor-pointer before:inline-block before:relative before:top-[0.2rem] before:left-[0.25rem] before:w-[1.1rem] before:h-[1.1rem] before:bg-white before:rounded-full before:transition-[left] before:duration-200 ease-in-out before:checked:left-[1.4rem]'>
 				</div>
-				<div  id='presences-edit-data-button1-inputdiv' class='[&>*]:opacity-50'>
+				<div  id='presences-edit-data-button1-inputdiv'>
 					<h3 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>LABEL<span class='text-danger font-extralight ml-[0.25rem]'>*</span></h3>
-					<input disabled id='presences-edit-data-button1-label' type='text' class='cursor-not-allowed w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
+					<input id='presences-edit-data-button1-label' type='text' class='w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
 					<h3 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>URL<span class='text-danger font-extralight ml-[0.25rem]'>*</span></h3>
-					<input disabled id='presences-edit-data-button1-url' type='text' class='cursor-not-allowed w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
+					<input id='presences-edit-data-button1-url' type='text' class='w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
 				</div>
 			</div>
 			<div class='p-[1rem] mt-[1rem] bg-half-secondary rounded border-black border-opacity-20 border-[1px]'>
@@ -100,11 +100,11 @@
 					<h2 class='w-full text-[1.25rem] font-semibold text-white my-[0.20rem] truncate'>Second Button</h2>
 					<input id='presences-edit-data-button2-enabled' type='checkbox' class='inline-block appearance-none mr-[0.5rem] w-[2.75rem] h-[1.5rem] min-w-[2.75rem] outline-none rounded-full bg-half-seventy transition-colors duration-200 checked:bg-success cursor-pointer before:inline-block before:relative before:top-[0.2rem] before:left-[0.25rem] before:w-[1.1rem] before:h-[1.1rem] before:bg-white before:rounded-full before:transition-[left] before:duration-200 ease-in-out before:checked:left-[1.4rem]'>
 				</div>
-				<div id='presences-edit-data-button2-inputdiv' class='[&>*]:opacity-50'>
+				<div id='presences-edit-data-button2-inputdiv'>
 					<h3 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>LABEL<span class='text-danger font-extralight ml-[0.25rem]'>*</span></h3>
-					<input disabled id='presences-edit-data-button2-label' type='text' class='cursor-not-allowed w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
+					<input id='presences-edit-data-button2-label' type='text' class='w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
 					<h3 class='text-[0.8rem] font-medium text-white text-opacity-60 mt-[1rem] my-[0.20rem]'>URL<span class='text-danger font-extralight ml-[0.25rem]'>*</span></h3>
-					<input disabled id='presences-edit-data-button2-url' type='text' class='cursor-not-allowed w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
+					<input id='presences-edit-data-button2-url' type='text' class='w-full my-[0.25rem] font-light text-white text-opacity-80 text-sm p-[0.5rem] outline-none bg-half-tertiary rounded transition-opacity duration-100'>
 				</div>
 			</div>
 		</div>

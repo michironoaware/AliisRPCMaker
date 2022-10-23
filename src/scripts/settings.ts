@@ -50,14 +50,8 @@ function onChanges(): void {
 }
 function canSetMinimized() {
 	minimized.disabled = !startup.checked;
-	if(!startup.checked) {
-		minimizedMenu.classList.add('[&>*]:opacity-50');
-		minimized.classList.add('cursor-not-allowed');
-	}
-	else {
-		minimizedMenu.classList.remove('[&>*]:opacity-50');
-		minimized.classList.remove('cursor-not-allowed');
-	}
+	if(!startup.checked) minimizedMenu.classList.add('[&>*]:opacity-50');
+	else minimizedMenu.classList.remove('[&>*]:opacity-50');
 }
 
 saveButton.addEventListener('click', async () => {

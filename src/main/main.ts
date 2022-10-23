@@ -76,3 +76,6 @@ app.whenReady().then(() => {
 	};
 	for(const key in handle) ipcMain.handle(key, handle[key]);
 });
+
+//partySize, partyMax
+//Timetsamps local

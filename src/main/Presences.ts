@@ -108,8 +108,7 @@ export namespace Presences {
 		fs.rmSync(nodePath.join(Config.path, 'data/presences', name, 'image'));
 	}
 	export function process(activity: PresenceData): ClientPresence {
-		const partySize: string | undefined = activity.partySize ? activity.partySize.toString() : undefined;
-		const partyMax: string | undefined = activity.partyMax ? activity.partyMax.toString() : undefined;
+		const timestamp: number = Date.now();
 		const buttons: Array<{ label: string; url: string; }> = [];
 		if(activity.buttonOneEnabled) buttons.push({
 			label: activity.buttons[0].label,
@@ -122,14 +121,14 @@ export namespace Presences {
 		return {
 			state: Utils.spaces.test(activity.state) ? undefined : activity.state,
 			details: Utils.spaces.test(activity.details) ? undefined : activity.details,
-			startTimestamp: activity.startTimestamp ?? undefined,
-			endTimestamp: activity.endTimestamp ?? undefined,
+			startTimestamp: activity.startTimestamp ? timestamp - activity.startTimestamp : undefined,
+			endTimestamp: activity.endTimestamp ? timestamp - activity.endTimestamp : undefined,
 			largeImageKey: Utils.spaces.test(activity.largeImageKey) ? undefined : activity.largeImageKey,
 			largeImageText: Utils.spaces.test(activity.largeImageText) ? undefined : activity.largeImageText,
 			smallImageKey: Utils.spaces.test(activity.smallImageKey) ? undefined : activity.smallImageKey,
 			smallImageText: Utils.spaces.test(activity.smallImageText) ? undefined : activity.smallImageText,
-			partySize: partySize && Utils.spaces.test(partySize) ? partySize : undefined,
-			partyMax: partyMax && Utils.spaces.test(partyMax) ? partyMax : undefined,
+			partySize: activity.partySize ?? undefined,
+			partyMax: activity.partyMax ?? undefined,
 			buttons: buttons.length > 0 ? buttons : undefined,
 		} as ClientPresence;
 	}

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { Presence, Presences } from '../main/Presences';
+import { Utils } from '../main/Utils';
 
 const changedSign: HTMLDivElement = document.getElementById('presences-changed') as HTMLDivElement;
 const saveButton: HTMLButtonElement = document.getElementById('presences-save') as HTMLButtonElement;
@@ -128,6 +129,31 @@ function onChanges(): void {
 	} 
 }
 
+function enableSizeInputs(): void {
+	const disabled: boolean = Utils.spaces.test(inputs.details.value);
+	inputs.partySize.disabled = disabled;
+	inputs.partyMax.disabled = disabled;
+}
+function enableButtonOneInputs(): void {
+	if(inputs.buttonOneEnabled.checked) {
+		buttonOneInputDiv.classList.remove('[&>*]:opacity-50');
+		buttonOneInputs.forEach(e => e.disabled = false);
+	}
+	else {
+		buttonOneInputDiv.classList.add('[&>*]:opacity-50');
+		buttonOneInputs.forEach(e => e.disabled = true);
+	}
+}
+function enableButtonTwoInputs(): void {
+	if(inputs.buttonTwoEnabled.checked) {
+		buttonTwoInputDiv.classList.remove('[&>*]:opacity-50');
+		buttonTwoInputs.forEach(e => e.disabled = false);
+	}
+	else {
+		buttonTwoInputDiv.classList.add('[&>*]:opacity-50');
+		buttonTwoInputs.forEach(e => e.disabled = true);
+	}
+}
 
 deleteImageButton.addEventListener('click', () => {
 	deleteImagePopup.classList.remove('!hidden', 'formDisappear');
@@ -145,38 +171,25 @@ deleteImageRemove.addEventListener('click', () => {
 	onChanges();
 });
 
-inputs.buttonOneEnabled.addEventListener('change', () => {
-	if(inputs.buttonOneEnabled.checked) {
-		buttonOneInputDiv.classList.remove('[&>*]:opacity-50');
-		buttonOneInputs.forEach(e => {
-			e.classList.remove('cursor-not-allowed');
-			e.disabled = false;
-		});
-	}
-	else {
-		buttonOneInputDiv.classList.add('[&>*]:opacity-50');
-		buttonOneInputs.forEach(e => {
-			e.classList.add('cursor-not-allowed');
-			e.disabled = true;
-		});
-	}
+inputs.details.addEventListener('input', enableSizeInputs);
+inputs.buttonOneEnabled.addEventListener('change', enableButtonOneInputs);
+inputs.buttonTwoEnabled.addEventListener('change', enableButtonTwoInputs);
+
+removePresenceButton.addEventListener('click', () => {
+	removePresencePopup.classList.remove('!hidden', 'formDisappear');
+	removePresencePopup.classList.add('formAppear');
 });
-inputs.buttonTwoEnabled.addEventListener('change', () => {
-	if(inputs.buttonTwoEnabled.checked) {
-		buttonTwoInputDiv.classList.remove('[&>*]:opacity-50');
-		buttonTwoInputs.forEach(e => {
-			e.classList.remove('cursor-not-allowed');
-			e.disabled = false;
-		});
-	}
-	else {
-		buttonTwoInputDiv.classList.add('[&>*]:opacity-50');
-		buttonTwoInputs.forEach(e => {
-			e.classList.add('cursor-not-allowed');
-			e.disabled = true;
-		});
-	}
+removePresenceClose.forEach(e => e.addEventListener('click', () => {
+	removePresencePopup.classList.remove('formAppear');
+	removePresencePopup.classList.add('formDisappear');
+	setTimeout(() => removePresencePopup.classList.add('!hidden'), 100);
+}));
+removePresenceRemove.addEventListener('click', () => {
+	removePresencePopup.classList.add('!hidden');
+	Presences.remove(presenceName);
+	window.location.href = './presences.html';
 });
+
 inputs.image.addEventListener('change', () => imageView.src = inputs.image.files?.[0]?.path ?? presenceImage);
 Object.values(inputs).forEach(e => e.addEventListener('change', onChanges));
 Object.values(inputs).forEach(e => e.addEventListener('input', onChanges));
@@ -214,26 +227,12 @@ saveButton.addEventListener('click', () => {
 	loadPresence(true, false);
 	onChanges();
 });
-
 resetButton.addEventListener('click', () => {
 	loadPresence(false, true);
 	onChanges();
 });
 
-removePresenceButton.addEventListener('click', () => {
-	removePresencePopup.classList.remove('!hidden', 'formDisappear');
-	removePresencePopup.classList.add('formAppear');
-});
-removePresenceClose.forEach(e => e.addEventListener('click', () => {
-	removePresencePopup.classList.remove('formAppear');
-	removePresencePopup.classList.add('formDisappear');
-	setTimeout(() => removePresencePopup.classList.add('!hidden'), 100);
-}));
-removePresenceRemove.addEventListener('click', () => {
-	removePresencePopup.classList.add('!hidden');
-	Presences.remove(presenceName);
-	window.location.href = './presences.html';
-});
-
-
 loadPresence(false, true);
+enableSizeInputs();
+enableButtonOneInputs();
+enableButtonTwoInputs();
