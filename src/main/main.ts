@@ -12,7 +12,7 @@ Directory.init(path.join(__dirname, '../../'), [
 			{
 				type: 'file',
 				id: 'settings.json',
-				content: JSON.stringify({})
+				content: JSON.stringify(Settings.dflt)
 			},
 			{
 				type: 'folder',

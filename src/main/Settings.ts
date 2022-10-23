@@ -12,7 +12,7 @@ export namespace Settings {
 	const path: string = nodePath.join(__dirname, '../../data/settings.json');
 	export const dflt: SettingsData = {
 		startup: true,
-		minimized: false,
+		minimized: true,
 		transport: 'ipc',
 	};
 

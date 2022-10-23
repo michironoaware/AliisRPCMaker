@@ -49,12 +49,16 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "src/assets/discord0.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "Aliis RPC Maker"
+            "name": "AliisRPCMaker",
+            "icon": "src/assets/discord0.ico",
+            "setupIcon": "src/assets/discord0.ico"
           }
         },
         {
@@ -65,11 +69,19 @@
         },
         {
           "name": "@electron-forge/maker-deb",
-          "config": {}
+          "config": {
+            "name": "AliisRPCMaker",
+            "icon": "src/assets/discord0.png",
+            "setupIcon": "src/assets/discord0.png"
+          }
         },
         {
           "name": "@electron-forge/maker-rpm",
-          "config": {}
+          "config": {
+            "name": "AliisRPCMaker",
+            "icon": "src/assets/discord0.png",
+            "setupIcon": "src/assets/discord0.png"
+          }
         }
       ]
     }
