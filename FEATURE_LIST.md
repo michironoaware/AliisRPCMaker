@@ -10,13 +10,13 @@
 - [ ] Hotkeys
 - [ ] Translations
 - [ ] Discord Developers Portal atajo
-- [ ] Presence Dinamic timestamps
+- [x] Presence Dinamic timestamps
 - [x] Presence Buttons
 - [ ] Documentation
 - [ ] GPU Rendering
 
 ## TODO
-- [ ] Validate inputs before submitting forms
+- [x] Validate inputs before submitting forms
 - [ ] More UI animations
 
 ## OTHER TODO
