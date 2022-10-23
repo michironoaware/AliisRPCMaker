@@ -1,7 +1,7 @@
 # AliisRPCMaker
 The best way to manage your activities on Discord and customize your profile!
 
-_This project is currently in beta status, [you can test it before a stable release here](https://github.com/RexAliis/AliisRPCMaker/releases)._
+_This project is currently in beta status._
 
 # [Downloads](https://github.com/RexAliis/AliisRPCMaker/releases)
 
