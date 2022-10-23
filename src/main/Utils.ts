@@ -1,3 +1,3 @@
 export namespace Utils {
-	export const spacesRegexp = /^( *)$/g;
+	export const spaces = /^( *)$/g;
 }

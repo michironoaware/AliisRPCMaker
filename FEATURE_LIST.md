@@ -14,3 +14,10 @@
 - [x] Presence Buttons
 - [ ] Documentation
 - [ ] GPU Rendering
+
+## TODO
+- [ ] Validate inputs before submitting forms
+- [ ] More UI animations
+
+## OTHER TODO
+- [ ] Website

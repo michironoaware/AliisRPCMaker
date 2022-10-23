@@ -1,7 +1,9 @@
 import fs, { Stats } from 'fs';
 import nodePath from 'path';
-import { Presence as PresenceRPC } from 'discord-rpc';
+import { Presence as ClientPresence } from 'discord-rpc';
 import { Config } from './Config';
+import { Utils } from './Utils';
+import { Settings } from './Settings';
 
 export interface PresenceButton {
 	label: string;
@@ -17,11 +19,12 @@ export interface PresenceData {
 	largeImageText: string;
 	smallImageKey: string;
 	smallImageText: string;
-	partySize: string;
-	partyMax: string;
+	partySize: number | null;
+	partyMax: number | null;
 	buttons: Array<PresenceButton>;
 	buttonOneEnabled: boolean;
 	buttonTwoEnabled: boolean;
+	//startTimestampOnStart: boolean;
 }
 export interface Presence {
 	name: string;
@@ -52,8 +55,8 @@ export namespace Presences {
 		largeImageText: '',
 		smallImageKey: '',
 		smallImageText: '',
-		partySize: '',
-		partyMax: '',
+		partySize: null,
+		partyMax: null,
 		buttons: [
 			{
 				label: '',
@@ -99,13 +102,38 @@ export namespace Presences {
 		if(presence.image) fs.copyFileSync(presence.image, nodePath.join(Config.path, 'data/presences', presence.name, 'image'));
 	}
 	export function remove(name: string): void {
-		fs.rmSync(nodePath.join(Config.path, 'data/presences', name));
+		fs.rmSync(nodePath.join(Config.path, 'data/presences', name), { recursive: true, });
 	}
-
-	/*TODO*/
-	/*export function processToData(activity: PresenceData): PresenceRPC {
-		if(activity.startTimestamp === 'start') activity.startTimestamp = Date.now();
-	
-		return activity as PresenceRPC;
-	}*/
+	export function removeImage(name: string): void {
+		fs.rmSync(nodePath.join(Config.path, 'data/presences', name, 'image'));
+	}
+	export function process(activity: PresenceData): ClientPresence {
+		const partySize: string | undefined = activity.partySize ? activity.partySize.toString() : undefined;
+		const partyMax: string | undefined = activity.partyMax ? activity.partyMax.toString() : undefined;
+		const buttons: Array<{
+			label: string;
+			url: string;
+		}> = [];
+		if(activity.buttonOneEnabled) buttons.push({
+			label: activity.buttons[0].label,
+			url: activity.buttons[0].url,
+		});
+		if(activity.buttonTwoEnabled) buttons.push({
+			label: activity.buttons[1].label,
+			url: activity.buttons[1].url,
+		});
+		return {
+			state: Utils.spaces.test(activity.state) ? undefined : activity.state,
+			details: Utils.spaces.test(activity.details) ? undefined : activity.details,
+			startTimestamp: activity.startTimestamp ?? undefined,
+			endTimestamp: activity.endTimestamp ?? undefined,
+			largeImageKey: Utils.spaces.test(activity.largeImageKey) ? undefined : activity.largeImageKey,
+			largeImageText: Utils.spaces.test(activity.largeImageText) ? undefined : activity.largeImageText,
+			smallImageKey: Utils.spaces.test(activity.smallImageKey) ? undefined : activity.smallImageKey,
+			smallImageText: Utils.spaces.test(activity.smallImageText) ? undefined : activity.smallImageText,
+			partySize: partySize && Utils.spaces.test(partySize) ? partySize : undefined,
+			partyMax: partyMax && Utils.spaces.test(partyMax) ? partyMax : undefined,
+			buttons: buttons.length > 0 ? buttons : undefined,
+		} as ClientPresence;
+	}
 }

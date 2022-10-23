@@ -5,52 +5,22 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<title>Settings</title>
-	<base href="../">  
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-	<link href='styles/style.css' rel='stylesheet'>
-	<link href='styles/output.css' rel='stylesheet'>
+	<link href='../styles/style.css' rel='stylesheet'>
+	<link href='../styles/output.css' rel='stylesheet'>
 	<script>var exports = {};</script>
 </head>
 
-<body class='h-screen w-screen flex flex-row overflow-x-hidden bg-half-primary font-poppins text-white select-none selection:bg-half-seventy selection:text-white'>
-	<header id='menu' class='h-full w-[40%] max-w-[25rem] p-[2rem] flex flex-col gap-y-[0.5rem] box-border bg-half-secondary'>
-		<div class='flex flex-row py-[0.5rem] gap-x-[0.5rem] font-semibold self-center'>
-			<img src='assets/discord1.svg' class='h-[1.25rem]'>
-			<span class='tracking-wide'>ALIIS RPC MAKER</span>
-		</div>
-		<nav class='w-full flex flex-col gap-y-[0.5rem]'>
-			<a href='views/presences.html' class='flex flex-row box-border p-[0.5rem] gap-x-[0.5rem] w-full outline-none cursor-pointer text-white text-opacity-80 font-light rounded transition-[color] duration-200 hover:text-opacity-100'>
-				<svg viewBox="0 0 24 24" class="icon-1qHBsr" width="24" height="24" color="currentColor"><path fill="currentColor" d="M14,17H7v-2h7V17z M17,13H7v-2h10V13z M17,9H7V7h10V9z M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14 c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z"></path></svg>
-				Presences
-			</a>
-			<a class='bg-primary flex flex-row box-border p-[0.5rem] gap-x-[0.5rem] w-full outline-none cursor-pointer font-light rounded'>
-				<svg viewBox="0 0 24 24" name="Fingerprint" class="icon-1qHBsr" width="24" height="24" color="currentColor"><path fill="currentColor" d="M22.7,19l-9.1-9.1c0.9-2.3,0.4-5-1.5-6.9c-2-2-5-2.4-7.4-1.3L9,6L6,9L1.6,4.7c-1.2,2.4-0.7,5.4,1.3,7.4 c1.9,1.9,4.6,2.4,6.9,1.5l9.1,9.1c0.4,0.4,1,0.4,1.4,0l2.3-2.3C23.1,20,23.1,19.3,22.7,19L22.7,19z"></path></svg>
-				Settings
-			</a>
-			<a href='views/documentation.html' class='flex flex-row box-border p-[0.5rem] gap-x-[0.5rem] w-full outline-none cursor-pointer text-white text-opacity-80 font-light rounded transition-[color] duration-200 hover:text-opacity-100'>
-				<svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-				Documentation
-			</a>
-		</nav>
-		<!--<div id='menu-playing' class='!hidden w-full p-[1rem] mt-[1rem] bg-half-tertiary rounded-md'>
-			<img id='menu-playing-image' src='assets/discord0.ico' class='float-right w-[3rem] ml-[0.5rem] aspect-square object-cover rounded-md'>
-			<h1  id='menu-playing-name' class='font-semibold'>Hello World</h1>
-			<p class='text-[0.8rem] font-light text-white text-opacity-60'>Time elapsed:<span id='menu-playing-timeElapsed' class='pl-[0.25rem]'>00:00 Paused</span></p>
-			<div class='flex flex-row flex-nowrap gap-x-[0.5rem] mt-[0.5rem]'>
-				<button id='menu-playing-play' class='px-[1.2rem] py-[0.4rem] font-medium rounded transition-all duration-200 text-xs bg-success2 hover:bg-success2-hover active:bg-success2-active'>Play</button>
-				<button id='menu-playing-stop' class='px-[1.2rem] py-[0.4rem] font-medium rounded transition-all duration-200 text-xs bg-danger hover:bg-danger-hover active:bg-danger-active'>Stop</button>
-			</div>
-		</div>-->
-	</header>
+<body class='h-screen w-screen flex flex-row overflow-x-hidden bg-half-primary font-poppins text-white select-none'>
 	<div id='main' class='h-full w-full max-w-[50rem] p-[2rem] box-border overflow-y-scroll bg-half-primary'>
 		<h1 class='text-[2rem] font-semibold pb-[0.25rem]'>Settings</h1>
 		<div class='flex flex-col divide-y-[2px] divide-solid divide-half-quaternary [&>div]:py-[1rem]'>
 			<div>
 				<h2 class='text-[0.8rem] font-semibold text-white text-opacity-60 pb-[0.5rem]'>SYSTEM STARTUP BEHAVIOR</h2>
 				<div class='flex flex-row items-start'>
-					<p class='min-w-max pb-[0.5rem]'>Open Aliis RPC Maker</p>
+					<p class='min-w-max pb-[0.5rem]'>Open Aliis RPC Maker<span class='font-light text-xs text-danger ml-[0.25rem]'>TODO</span></p>
 					<div class='w-full min-w[1rem]'></div>
 					<input id='settings-options-startup' type='checkbox' class='inline-block appearance-none w-[2.75rem] h-[1.5rem] min-w-[2.75rem] outline-none rounded-full bg-half-seventy transition-colors duration-200 checked:bg-success cursor-pointer before:inline-block before:relative before:top-[0.2rem] before:left-[0.25rem] before:w-[1.1rem] before:h-[1.1rem] before:bg-white before:rounded-full before:transition-[left] before:duration-200 ease-in-out before:checked:left-[1.4rem]'>
 				</div>
@@ -58,7 +28,7 @@
 			</div>
 			<div>
 				<div class='flex flex-row items-start'>
-					<p class='min-w-max pb-[0.5rem]'>Start minimized</p>
+					<p class='min-w-max pb-[0.5rem]'>Start minimized<span class='font-light text-xs text-danger ml-[0.25rem]'>TODO</span></p>
 					<div class='w-full min-w[1rem]'></div>
 					<input id='settings-options-minimized' type='checkbox' class='inline-block appearance-none w-[2.75rem] h-[1.5rem] min-w-[2.75rem] outline-none rounded-full bg-half-seventy transition-colors duration-200 checked:bg-success cursor-pointer before:inline-block before:relative before:top-[0.2rem] before:left-[0.25rem] before:w-[1.1rem] before:h-[1.1rem] before:bg-white before:rounded-full before:transition-[left] before:duration-200 ease-in-out before:checked:left-[1.4rem]'>
 				</div>
@@ -66,7 +36,7 @@
 			</div>
 			<div>
 				<h2 class='text-[0.8rem] font-semibold text-white text-opacity-60'>TRANSPORT TYPE</h2>
-				<p class='text-[0.8rem] text-white text-opacity-60'>Transport type for sharing data between Discord and Aliis.</p>
+				<p class='text-[0.8rem] text-white text-opacity-60'>Transport type for sharing data between <b>Discord</b> and <b>Aliis RPC Maker</b>.</p>
 				<div class='form-check flex flex-row items-center gap-x-[0.25rem] pt-[0.25rem]'>
 					<input id='settings-options-transport-ipc' name='settings-options-transport' value='ipc' type='radio' class='outline-none form-check-input appearance-none inline-block w-[1.5rem] h-[1.5rem] rounded-md border-[1px] border-white border-opacity-20 checked:bg-primary cursor-pointer'>
 					<label class='form-check-label inline-block'>IPC<span class='text-[0.8rem] pl-[0.25rem] text-success text-opacity-80'>Recommended</span></label>
@@ -84,5 +54,5 @@
 			<button id='settings-save' class='bg-success2 rounded box-border min-w-max px-[0.6rem] py-[0.4rem] outline-none text-sm tracking-tight text-center transition-colors duration-100 hover:bg-success2-hover active:bg-success2-active'>Save changes</button>
 		</div>
 	</div>
-	<script src='scripts/settings.js' type='module'></script>
+	<script src='../scripts/settings.js' type='module'></script>
 </body>

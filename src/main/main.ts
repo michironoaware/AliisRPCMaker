@@ -35,13 +35,15 @@ app.whenReady().then(() => {
 		icon: discordIcon,
 		show: !Settings.get().minimized,
 		webPreferences: {
+			devTools: false,
 			webviewTag: true,
 			contextIsolation: false,
 			sandbox: false,
 			nodeIntegration: true,
+			nodeIntegrationInSubFrames: true,
 		},
 	});
-	window.loadFile(path.join(__dirname, '../views/frame.html'));
+	window.loadFile(path.join(__dirname, '../views/index.html'));
 
 	const tray: Tray = new Tray(discordIcon);
 	tray.setToolTip('Aliis RPC Maker');

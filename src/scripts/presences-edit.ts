@@ -1,11 +1,21 @@
 import fs from 'fs';
 import path from 'path';
-import { PresenceData, Presence, Presences } from '../main/Presences';
-import { Utils } from '../main/Utils';
+import { Presence, Presences } from '../main/Presences';
 
 const changedSign: HTMLDivElement = document.getElementById('presences-changed') as HTMLDivElement;
 const saveButton: HTMLButtonElement = document.getElementById('presences-save') as HTMLButtonElement;
 const resetButton: HTMLButtonElement = document.getElementById('presences-reset') as HTMLButtonElement;
+
+const deleteImageButton: HTMLButtonElement = document.getElementById('presences-edit-image-delete') as HTMLButtonElement;
+const deleteImagePopup: HTMLDivElement = document.getElementById('presences-deleteimage') as HTMLDivElement;
+const deleteImageRemove: HTMLButtonElement = document.getElementById('presences-deleteimage-remove') as HTMLButtonElement;
+const deleteImageClose: Array<HTMLButtonElement> = [ ...document.getElementsByClassName('presences-deleteimage-close') ] as Array<HTMLButtonElement>;
+
+const removePresenceButton: HTMLButtonElement = document.getElementById('presences-edit-presence-delete') as HTMLButtonElement;
+const removePresencePopup: HTMLDivElement = document.getElementById('presences-deletepresence') as HTMLDivElement;
+const removePresenceRemove: HTMLButtonElement = document.getElementById('presences-deletepresence-remove') as HTMLButtonElement;
+const removePresenceClose: Array<HTMLButtonElement> = [ ...document.getElementsByClassName('presences-deletepresence-close') ] as Array<HTMLButtonElement>;
+
 
 const buttonOneInputDiv: HTMLDivElement = document.getElementById('presences-edit-data-button1-inputdiv') as HTMLDivElement;
 const buttonOneInputs: Array<HTMLInputElement> = [
@@ -47,28 +57,38 @@ let presence: Presence | undefined = Presences.get(presenceName);
 if(!presence) window.location.href = './presences.html';
 let presenceImage: string = path.join(presence!.path, 'image');
 
-function loadPresence() {
+function loadPresence(resetPresence: boolean, resetImage: boolean) {
+	if(resetPresence) {
+		presenceName = inputs.name.value;
+		presence = Presences.get(presenceName);
+		presenceImage = path.join(presence!.path, 'image');
+	}
+	if(resetImage) imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
 	inputs.image.value = '';
 	if(!presence) window.location.href = './presences.html';
-	inputs.name.value = presence!.name;
-	inputs.id.value = presence!.data.id;
-	inputs.state.value = presence!.data.state;
-	inputs.details.value = presence!.data.details;
-	inputs.largeImageKey.value = presence!.data.largeImageKey;
-	inputs.largeImageText.value = presence!.data.largeImageText;
-	inputs.smallImageKey.value = presence!.data.smallImageKey;
-	inputs.smallImageText.value = presence!.data.smallImageText;
-	inputs.partySize.value = presence!.data.partySize;
-	inputs.partyMax.value = presence!.data.partyMax;
+	inputs.name.value = presence!.name ?? '';
+	inputs.id.value = presence!.data.id ?? '';
+	inputs.state.value = presence!.data.state ?? '';
+	inputs.details.value = presence!.data.details ?? '';
+	inputs.largeImageKey.value = presence!.data.largeImageKey ?? '';
+	inputs.largeImageText.value = presence!.data.largeImageText ?? '';
+	inputs.smallImageKey.value = presence!.data.smallImageKey ?? '';
+	inputs.smallImageText.value = presence!.data.smallImageText ?? '';
+	inputs.partySize.value = presence!.data.partySize ? presence!.data.partySize.toString() : '';
+	inputs.partyMax.value = presence!.data.partyMax ? presence!.data.partyMax.toString() : '';
 	inputs.startTimestamp.valueAsNumber = presence!.data.startTimestamp ?? NaN;
 	inputs.endTimestamp.valueAsNumber = presence!.data.endTimestamp ?? NaN;
-	inputs.buttonOneLabel.value = presence!.data.buttons[0].label;
-	inputs.buttonOneUrl.value = presence!.data.buttons[0].url;
-	inputs.buttonTwoLabel.value = presence!.data.buttons[1].label;
-	inputs.buttonTwoUrl.value = presence!.data.buttons[1].url;
+	inputs.buttonOneLabel.value = presence!.data.buttons[0].label ?? '';
+	inputs.buttonOneUrl.value = presence!.data.buttons[0].url ?? '';
+	inputs.buttonTwoLabel.value = presence!.data.buttons[1].label ?? '';
+	inputs.buttonTwoUrl.value = presence!.data.buttons[1].url ?? '';
 
 	inputs.buttonOneEnabled.checked = presence!.data.buttonOneEnabled;
 	inputs.buttonTwoEnabled.checked = presence!.data.buttonTwoEnabled;
+	if(presence!.data.buttonOneEnabled) buttonOneInputDiv.classList.remove('[&>*]:opacity-50');
+	else buttonOneInputDiv.classList.add('[&>*]:opacity-50');
+	if(presence!.data.buttonTwoEnabled) buttonTwoInputDiv.classList.remove('[&>*]:opacity-50');
+	else buttonTwoInputDiv.classList.add('[&>*]:opacity-50');
 }
 
 function presencesUpdated(): boolean {
@@ -82,8 +102,8 @@ function presencesUpdated(): boolean {
 		inputs.largeImageText.value !== presence!.data.largeImageText ||
 		inputs.smallImageKey.value !== presence!.data.smallImageKey ||
 		inputs.smallImageText.value !== presence!.data.smallImageText ||
-		inputs.partySize.value !== presence!.data.partySize ||
-		inputs.partyMax.value !== presence!.data.partyMax ||
+		inputs.partySize.value !== (presence!.data.partySize ? presence!.data.partySize.toString() : '') ||
+		inputs.partyMax.value !== (presence!.data.partyMax ? presence!.data.partyMax.toString() : '') ||
 		inputs.startTimestamp.valueAsNumber !== (presence!.data.startTimestamp ?? NaN) && !(isNaN(inputs.startTimestamp.valueAsNumber) && isNaN(presence!.data.startTimestamp ?? NaN)) ||
 		inputs.endTimestamp.valueAsNumber !== (presence!.data.endTimestamp ?? NaN) && !(isNaN(inputs.endTimestamp.valueAsNumber) && isNaN(presence!.data.endTimestamp ?? NaN)) ||
 		inputs.buttonOneLabel.value !== presence!.data.buttons[0].label ||
@@ -107,6 +127,23 @@ function onChanges(): void {
 		if(!updated) setTimeout(() => changedSign.classList.remove('popupChangedDown'), 500);
 	} 
 }
+
+
+deleteImageButton.addEventListener('click', () => {
+	deleteImagePopup.classList.remove('!hidden', 'formDisappear');
+	deleteImagePopup.classList.add('formAppear');
+});
+deleteImageClose.forEach(e => e.addEventListener('click', () => {
+	deleteImagePopup.classList.remove('formAppear');
+	deleteImagePopup.classList.add('formDisappear');
+	setTimeout(() => deleteImagePopup.classList.add('!hidden'), 100);
+}));
+deleteImageRemove.addEventListener('click', () => {
+	deleteImagePopup.classList.add('!hidden');
+	Presences.removeImage(presenceName);
+	loadPresence(false, true);
+	onChanges();
+});
 
 inputs.buttonOneEnabled.addEventListener('change', () => {
 	if(inputs.buttonOneEnabled.checked) {
@@ -156,8 +193,8 @@ saveButton.addEventListener('click', () => {
 			largeImageText: inputs.largeImageText.value,
 			smallImageKey: inputs.smallImageKey.value,
 			smallImageText: inputs.smallImageText.value,
-			partySize: inputs.partySize.value,
-			partyMax: inputs.partyMax.value,
+			partySize: inputs.partySize.value !== '' ? Number.parseInt(inputs.partySize.value) : null,
+			partyMax: inputs.partyMax.value !== '' ? Number.parseInt(inputs.partyMax.value) : null,
 			startTimestamp: inputs.startTimestamp.valueAsNumber ?? null,
 			endTimestamp: inputs.endTimestamp.valueAsNumber ?? null,
 			buttons: [
@@ -174,18 +211,29 @@ saveButton.addEventListener('click', () => {
 			buttonTwoEnabled: inputs.buttonTwoEnabled.checked,
 		}
 	});
-	presenceName = inputs.name.value;
-	presence = Presences.get(presenceName);
-	presenceImage = path.join(presence!.path, 'image');
-	loadPresence();
+	loadPresence(true, false);
 	onChanges();
 });
 
 resetButton.addEventListener('click', () => {
-	imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
-	loadPresence();
+	loadPresence(false, true);
 	onChanges();
 });
 
-imageView.src = fs.existsSync(presenceImage) ? presenceImage : '../assets/discord0.ico';
-loadPresence();
+removePresenceButton.addEventListener('click', () => {
+	removePresencePopup.classList.remove('!hidden', 'formDisappear');
+	removePresencePopup.classList.add('formAppear');
+});
+removePresenceClose.forEach(e => e.addEventListener('click', () => {
+	removePresencePopup.classList.remove('formAppear');
+	removePresencePopup.classList.add('formDisappear');
+	setTimeout(() => removePresencePopup.classList.add('!hidden'), 100);
+}));
+removePresenceRemove.addEventListener('click', () => {
+	removePresencePopup.classList.add('!hidden');
+	Presences.remove(presenceName);
+	window.location.href = './presences.html';
+});
+
+
+loadPresence(false, true);

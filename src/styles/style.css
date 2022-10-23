@@ -1,3 +1,7 @@
+body {
+	zoom: 1;
+}
+
 #frame-free {
 	-webkit-app-region: drag;
 }
@@ -12,12 +16,11 @@ input::-webkit-calendar-picker-indicator {
 
 ::-webkit-scrollbar {
 	width: 1rem;
-}
-::-webkit-scrollbar-track:hover {
-	background: #2f3136;
+	box-sizing: border-box;
+	background: #36393f;
 }
 ::-webkit-scrollbar-thumb {
-	background: #2f3136;
+	background: #292b2f;
 }
 ::-webkit-scrollbar-thumb:hover {
 	background: #202225;
@@ -100,12 +103,12 @@ input::-webkit-calendar-picker-indicator {
 /*Make an popupChangedShake effect on the entire screen*/
 /*Finish presenceForm animations*/
 
-.presenceFormAppear {
+.formAppear {
 	animation-duration: 100ms;
-	animation-name: presenceFormAppear;
+	animation-name: formAppear;
 	animation-fill-mode: backwards;
 }
-@keyframes presenceFormAppear {
+@keyframes formAppear {
 	0% {
 		opacity: 0;
 	}
@@ -113,13 +116,13 @@ input::-webkit-calendar-picker-indicator {
 		opacity: 1;
 	}
 }
-.presenceFormDisappear {
+.formDisappear {
 
 	animation-duration: 100ms;
-	animation-name: presenceFormDisappear;
+	animation-name: formDisappear;
 	animation-fill-mode: forwards;
 }
-@keyframes presenceFormDisappear {
+@keyframes formDisappear {
 	0% {
 		opacity: 1;
 	}
