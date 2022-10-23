@@ -12,6 +12,8 @@ _This project is currently in a beta state so bugs are more likely, if you want 
 ## About
 This is my first project using technologies like typescript and electron so it is very likely that the code is not very consistent, I accept any suggestion as long as it is not with the intention of implementing personal practices or to correct things when it is not necessary.
 
+Btw, "Windows has protected your PC" it's just Windows Defender being silly, you can always check the source code to find out how the app works!
+
 - [Feature List](https://github.com/RexAliis/AliisRPCMaker/blob/main/FEATURE_LIST.md)
 
 ![Discord Server](https://discordapp.com/api/guilds/1030982857096712226/widget.png?style=banner2)
