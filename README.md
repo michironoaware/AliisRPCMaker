@@ -7,7 +7,7 @@ _This project is currently in a beta state so bugs are more likely, if you want 
 
 # [Downloads](https://github.com/RexAliis/AliisRPCMaker/releases)
 
-- [Last Beta v1.0.1 (Windows)](https://github.com/RexAliis/AliisRPCMaker/releases/download/v1.0.1/windows32-x64-potable.zip)
+- [Last Beta v1.0.1 (Windows)](https://github.com/RexAliis/AliisRPCMaker/releases/download/v1.0.1/windows32-x64-portable.zip)
 
 ## About
 This is my first project using technologies like typescript and electron so it is very likely that the code is not very consistent, I accept any suggestion as long as it is not with the intention of implementing personal practices or to correct things when it is not necessary.
