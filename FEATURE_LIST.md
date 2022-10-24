@@ -15,9 +15,7 @@
 - [ ] Documentation
 - [ ] GPU Rendering
 
-## TODO
+## Other
 - [x] Validate inputs before submitting forms
 - [ ] More UI animations
-
-## OTHER TODO
 - [ ] Website
