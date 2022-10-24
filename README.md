@@ -1,7 +1,7 @@
 ![Discord Server](https://discordapp.com/api/guilds/1030982857096712226/widget.png?style=shield)
 
 # AliisRPCMaker
-The best way to manage your activities on Discord and customize your profile!
+The best way to customize your profile!
 
 _This project is currently in a beta state so bugs are more likely, if you want to contribute to the project you are more than welcome to join our [Discord](https://discord.com/invite/hP23XgU6RW)!_
 
