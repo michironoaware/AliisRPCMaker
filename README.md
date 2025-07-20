@@ -15,8 +15,6 @@ The best way to customize your [Discord](https://discord.com) profile!
 
 This project is not for profit, however if you want to support in some way you can always give the repository a star!
 
-## About
-This is my first project using technologies like typescript and electron so it is very likely that the code is not very consistent, I accept any suggestion as long as it is not with the intention of implementing personal practices or to correct things when it is not necessary.
 
 Btw, "**Windows has protected your PC**" it's just Windows Defender being silly, you can always check the source code to find out how the app works!
 
