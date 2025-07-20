@@ -3,7 +3,7 @@
 # AliisRPCMaker
 The best way to customize your [Discord](https://discord.com) profile!
 
-**_The development of the project has been stopped._** It's been a long time since I last worked on the project and my opinion on it has changed. Although it has potential, it is not my priority right now and there are things that can be done better. My initial idea was to give a modern and simple tool to Discord users to change the profile on a whim, without significantly affecting performance. But I haven't made the best choice of tools and my motivation is not the same. Maybe I'll work on this project again in the future. Previous versions will remain available and the repository will remain in a read-only state.
+**_The development of the project has been stopped._** Although it has potential, it is not my priority right now. Previous versions will remain available and the repository will remain in a read-only state.
 
 ~~_This project is currently in a beta state so bugs are more likely, if you want to contribute to the project you are more than welcome to join our [Discord](https://discord.com/invite/hP23XgU6RW)!_~~
 
